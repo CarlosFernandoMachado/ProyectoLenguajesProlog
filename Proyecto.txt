@@ -18,3 +18,9 @@ lista_estudiantes(Curso,Lista):-setof(Estudiante,lleva_clase(Estudiante,Curso),L
 clase_fechas([],L):- L=[] .
 clase_fechas([H|T],Lista) :- fechaexam(H,Fechas), clase_fechas(T,Lista2), Lista = [Fechas|Lista2].
 lista_fechas(Id_e,Lista):- estudiante(Id_e,_,Clases), clase_fechas(Clases,Lista).   
+
+
+es_zurdo(Id_e,Curso):- estudiante(Id_e,Zurdo,Clases), member(Curso,Clases), Zurdo = 1.
+lista_zurdos(Curso,Lista):-setof(Estudiante,es_zurdo(Estudiante,Curso),Lista).
+aula_adecuada(Id_a,Cantidad):- aula(Id_a,_,Mesas_z), Mesas_z >= Cantidad.
+aulas_adecuadas(Id_c,Lista):- lista_zurdos(Id_c,Lista_zurdos), length(Lista_zurdos,Cantidad), setof(Aula,aula_adecuada(Aula,Cantidad),Lista).
