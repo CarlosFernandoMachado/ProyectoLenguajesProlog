@@ -1,0 +1,16 @@
+aula(101,20,15).
+aula(102,30,2).
+aula(103,20,0).
+
+estudiante(10,1,[mate,progra,español]).
+estudiante(11,0,[progra,español]).
+estudiante(12,0,[fisica,mate,historia]).
+
+fechaexam(mate,['12-9-20','15-10-20','1-11-20']).
+fechaexam(español,['18-5-20','14-6-20','1-7-20']).
+fechaexam(progra,['2-9-20','23-10-20','9-11-20']).
+fechaexam(fisica,['20-8-20','10-10-20','30-9-20']).
+
+
+lleva_clase(Id_e,Curso):- estudiante(Id_e,_,Clases), member(Curso,Clases).
+lista_estudiantes(Curso,Lista):-setof(Estudiante,lleva_clase(Estudiante,Curso),Lista).
