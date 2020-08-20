@@ -14,3 +14,7 @@ fechaexam(fisica,['20-8-20','10-10-20','30-9-20']).
 
 lleva_clase(Id_e,Curso):- estudiante(Id_e,_,Clases), member(Curso,Clases).
 lista_estudiantes(Curso,Lista):-setof(Estudiante,lleva_clase(Estudiante,Curso),Lista).
+
+clase_fechas([],L):- L=[] .
+clase_fechas([H|T],Lista) :- fechaexam(H,Fechas), clase_fechas(T,Lista2), Lista = [Fechas|Lista2].
+lista_fechas(Id_e,Lista):- estudiante(Id_e,_,Clases), clase_fechas(Clases,Lista).   
